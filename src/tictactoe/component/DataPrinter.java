@@ -16,6 +16,7 @@
 
 package tictactoe.component;
 
+import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
 
 /**
@@ -23,11 +24,25 @@ import tictactoe.model.GameTable;
  * @link https://github.com/dogmax296
  */
 public class DataPrinter {
-    public void printMappingTable() {
 
+    public void printMappingTable() {
+        System.out.println("-------------");
+        System.out.println("| 7 | 8 | 9 |");
+        System.out.println("-------------");
+        System.out.println("| 4 | 5 | 6 |");
+        System.out.println("-------------");
+        System.out.println("| 1 | 2 | 3 |");
+        System.out.println("-------------");
     }
 
     public void printGameTable(final GameTable gametable) {
-
+        for (int i = 0; i < 3; i++) {
+            System.out.println("-------------");
+            for (int j = 0; j < 3; j++) {
+                System.out.print("| " + gametable.getSign(new Cell(i, j)) + " ");
+            }
+            System.out.println("|");
+        }
+        System.out.println("-------------");
     }
 }

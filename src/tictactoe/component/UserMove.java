@@ -16,14 +16,57 @@
 
 package tictactoe.component;
 
+import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
+
+import java.util.Scanner;
 
 /**
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
 public class UserMove {
+
+    private final char[][] mappingTable = {
+            {'7', '8', '9'},
+            {'4', '5', '6'},
+            {'1', '2', '3'}
+    };
+
+
     public void make(final GameTable gametable) {
+        while (true) {
+            final Cell cell = getUserInput();
+            if (gametable.isEmpty(cell)) {
+                gametable.setSign(cell, 'X');
+                return;
+            } else {
+                System.out.println("Can't make a move, because the cell is not free! Try again!");
+            }
+        }
+    }
+
+    private Cell getUserInput() {
+        while (true) {
+            System.out.println("Please, enter the number from 1 to 9!");
+            final String userInput = new Scanner(System.in).nextLine();
+            if (userInput.length() == 1) {
+                final char ch = userInput.charAt(0);
+                if (ch >= '1' && ch <= '9') {
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            if (mappingTable[i][j] == ch) {
+                                return new Cell(i, j);
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("Wrong Symbol!");
+                }
+            } else {
+                System.out.println("Use single character");
+            }
+        }
 
     }
 }

@@ -16,6 +16,7 @@
 
 package tictactoe.component;
 
+import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
 
 /**
@@ -24,10 +25,52 @@ import tictactoe.model.GameTable;
  */
 public class WinnerVerifier {
     public boolean isUserWin(final GameTable gametable) {
-        return false;
+        return isWinner(gametable, 'X');
     }
 
     public boolean isComputerWin(final GameTable gametable) {
+        return isWinner(gametable, '0');
+    }
+
+    private boolean isWinner(final GameTable gametable, final char symbol) {
+        return isWinByRows(gametable, symbol) ||
+                isWinByCols(gametable, symbol) ||
+                isWinByMainDiagonal(gametable, symbol) ||
+                isWinBySecondDiagonal(gametable, symbol);
+    }
+
+
+    private boolean isWinBySecondDiagonal(final GameTable gameTable, final char symbol) {
+        return gameTable.getSign(new Cell(0, 2)) == gameTable.getSign(new Cell(1, 1)) &&
+                gameTable.getSign(new Cell(1, 1)) == gameTable.getSign(new Cell(2, 0)) &&
+                gameTable.getSign(new Cell(2, 0)) == symbol;
+    }
+
+    private boolean isWinByMainDiagonal(final GameTable gameTable, final char symbol) {
+        return gameTable.getSign(new Cell(0, 0)) == gameTable.getSign(new Cell(1, 1)) &&
+                gameTable.getSign(new Cell(1, 1)) == gameTable.getSign(new Cell(2, 2)) &&
+                gameTable.getSign(new Cell(2, 2)) == symbol;
+    }
+
+    private boolean isWinByRows(final GameTable gameTable, final char symbol) {
+        for (int i = 0; i < 3; i++) {
+            if (gameTable.getSign(new Cell(0, i)) == gameTable.getSign(new Cell(1, i)) &&
+                    gameTable.getSign(new Cell(1, i)) == gameTable.getSign(new Cell(2, i)) &&
+                    gameTable.getSign(new Cell(2, i)) == symbol) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isWinByCols(final GameTable gameTable, final char symbol) {
+        for (int i = 0; i < 3; i++) {
+            if (gameTable.getSign(new Cell(i, 0)) == gameTable.getSign(new Cell(i, 1)) &&
+                    gameTable.getSign(new Cell(i, 1)) == gameTable.getSign(new Cell(i, 2)) &&
+                    gameTable.getSign(new Cell(i, 2)) == symbol) {
+                return true;
+            }
+        }
         return false;
     }
 }

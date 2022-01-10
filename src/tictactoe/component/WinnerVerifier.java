@@ -29,6 +29,7 @@ public class WinnerVerifier {
     }
 
     public boolean isComputerWin(final GameTable gametable) {
+
         return isWinner(gametable, '0');
     }
 

@@ -14,14 +14,20 @@
  *    limitations under the License.
  */
 
-package tictactoe;
+package tictactoe.component;
+
+import tictactoe.model.GameTable;
 
 /**
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public class UserMove {
-    public void make(final GameTable gametable) {
+public class DataPrinter {
+    public void printMappingTable() {
+
+    }
+
+    public void printGameTable(final GameTable gametable) {
 
     }
 }

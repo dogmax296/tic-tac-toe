@@ -16,6 +16,8 @@
 
 package tictactoe;
 
+import tictactoe.component.*;
+
 /**
  * @author dogmax296
  * @link https://github.com/dogmax296

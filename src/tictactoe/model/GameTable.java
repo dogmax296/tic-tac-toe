@@ -14,18 +14,11 @@
  *    limitations under the License.
  */
 
-package tictactoe;
+package tictactoe.model;
 
 /**
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public class DataPrinter {
-    public void printMappingTable() {
-
-    }
-
-    public void printGameTable(final GameTable gametable) {
-
-    }
+public class GameTable {
 }

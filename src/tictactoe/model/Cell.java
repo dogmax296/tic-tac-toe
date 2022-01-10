@@ -20,22 +20,22 @@ package tictactoe.model;
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public class GameTable {
-    private final char[][] table = {
-            {' ', ' ', ' '},
-            {' ', ' ', ' '},
-            {' ', ' ', ' '}
-    };
+public class Cell {
 
-    public boolean isEmpty(final Cell cell) {
-        return table[cell.getRow()][cell.getColl()] == ' ';
+    private final int row;
+
+    private final int coll;
+
+    public Cell(final int row, final int coll) {
+        this.row = row;
+        this.coll = coll;
     }
 
-    public char getSign(final Cell cell) {
-        return table[cell.getRow()][cell.getColl()];
+    public int getRow() {
+        return row;
     }
 
-    public void setSign(final Cell cell, final char sign) {
-        table[cell.getRow()][cell.getColl()] = sign;
+    public int getColl() {
+        return coll;
     }
 }

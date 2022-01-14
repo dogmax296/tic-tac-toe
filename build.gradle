@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'dogmax296'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    archiveFileName = 'tic-tac-toe.jar'
+    manifest {
+        attributes(
+                'Main-Class': 'tictactoe.Launcher'
+        )
+    }
+}

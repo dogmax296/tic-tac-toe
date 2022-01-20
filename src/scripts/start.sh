@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
-java -jar ${project.build.finalName}*.jar
-echo "Press enter to continue..."
+cd "$(dirname "$0")" || exit
+java -jar ${project.build.finalName}.jar
+echo "Press enter to continue . . ."
 read -r test

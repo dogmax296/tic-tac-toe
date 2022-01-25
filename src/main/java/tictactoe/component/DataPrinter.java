@@ -1,6 +1,6 @@
 package tictactoe.component;
 
-import tictactoe.model.GameTable;
+import tictactoe.model.game.GameTable;
 
 /**
  * @author dogmax296
@@ -8,9 +8,9 @@ import tictactoe.model.GameTable;
  */
 public interface DataPrinter {
 
+    void printInstructions();
     void printInfoMessage(String message);
     void printErrorMessage(String message);
-    void printMappingTable();
     void printGameTable(final GameTable gametable);
 
 }

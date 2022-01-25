@@ -14,9 +14,9 @@
  *    limitations under the License.
  */
 
-package tictactoe.component;
+package tictactoe.component.console;
 
-import tictactoe.model.Cell;
+import tictactoe.model.game.Cell;
 
 /**
  * @author dogmax296

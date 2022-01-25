@@ -1,9 +1,10 @@
 package tictactoe.component.swing;
 
 import tictactoe.component.DataPrinter;
+import tictactoe.component.GameOverHandler;
 import tictactoe.component.UserInputReader;
-import tictactoe.model.Cell;
-import tictactoe.model.GameTable;
+import tictactoe.model.game.Cell;
+import tictactoe.model.game.GameTable;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,7 +26,7 @@ import javax.swing.WindowConstants;
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public final class GameWindow extends JFrame implements DataPrinter, UserInputReader {
+public final class GameWindow extends JFrame implements DataPrinter, UserInputReader, GameOverHandler {
 
     private static final int GAME_TABLE_SIZE = 3;
 
@@ -89,6 +90,11 @@ public final class GameWindow extends JFrame implements DataPrinter, UserInputRe
     }
 
     @Override
+    public void gameOver() {
+        System.exit(0);
+    }
+
+    @Override
     public void printInfoMessage(final String message) {
         JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -99,7 +105,7 @@ public final class GameWindow extends JFrame implements DataPrinter, UserInputRe
     }
 
     @Override
-    public void printMappingTable() {
+    public void printInstructions() {
         // do nothing
     }
 

@@ -1,4 +1,4 @@
-package tictactoe.model;
+package tictactoe.model.config;
 
 /**
  * @author dogmax296

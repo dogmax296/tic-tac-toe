@@ -1,7 +1,7 @@
 package tictactoe.component;
 
-import tictactoe.model.GameTable;
-import tictactoe.model.Sign;
+import tictactoe.model.game.GameTable;
+import tictactoe.model.game.Sign;
 
 /**
  * @author dogmax296

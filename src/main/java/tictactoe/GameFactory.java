@@ -1,17 +1,21 @@
-package tictactoe.component;
+package tictactoe;
 
+import tictactoe.component.*;
+import tictactoe.component.config.CommandLineArgumentParser;
+import tictactoe.component.console.CellNumberConverter;
 import tictactoe.component.console.ConsoleDataPrinter;
+import tictactoe.component.console.ConsoleGameOverHandler;
 import tictactoe.component.console.ConsoleUserInputReader;
-import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
+import tictactoe.component.console.keypad.DesktopNumericKeypadCellNumberConverter;
 import tictactoe.component.swing.GameWindow;
-import tictactoe.model.Player;
-import tictactoe.model.PlayerType;
-import tictactoe.model.UserInterface;
+import tictactoe.model.game.Player;
+import tictactoe.model.config.PlayerType;
+import tictactoe.model.config.UserInterface;
 
-import static tictactoe.component.CommandLineArgumentParser.*;
-import static tictactoe.model.PlayerType.*;
-import static tictactoe.model.Sign.*;
-import static tictactoe.model.UserInterface.*;
+import static tictactoe.component.config.CommandLineArgumentParser.*;
+import static tictactoe.model.config.PlayerType.*;
+import static tictactoe.model.game.Sign.*;
+import static tictactoe.model.config.UserInterface.*;
 
 /**
  * @author dogmax296
@@ -33,15 +37,17 @@ public class GameFactory {
     public Game create() {
         final DataPrinter dataPrinter;
         final UserInputReader userInputReader;
-
+        final GameOverHandler gameOverHandler;
         if (userInterface == GUI) {
             final GameWindow gameWindow = new GameWindow();
             dataPrinter = gameWindow;
             userInputReader = gameWindow;
+            gameOverHandler = gameWindow;
         } else {
             final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
             dataPrinter = new ConsoleDataPrinter(cellNumberConverter);
             userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
+            gameOverHandler = new ConsoleGameOverHandler(dataPrinter);
         }
 
         Player player1 = null;
@@ -60,6 +66,7 @@ public class GameFactory {
 
         final boolean canSecondPlayerMakeFirstMove = this.player1Type != this.player2Type;
         return new Game(
+                gameOverHandler,
                 dataPrinter,
                 player1,
                 player2,

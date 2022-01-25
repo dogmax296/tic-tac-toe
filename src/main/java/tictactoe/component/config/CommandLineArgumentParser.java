@@ -1,10 +1,10 @@
-package tictactoe.component;
+package tictactoe.component.config;
 
-import tictactoe.model.PlayerType;
-import tictactoe.model.UserInterface;
+import tictactoe.model.config.PlayerType;
+import tictactoe.model.config.UserInterface;
 
-import static tictactoe.model.PlayerType.*;
-import static tictactoe.model.UserInterface.*;
+import static tictactoe.model.config.PlayerType.*;
+import static tictactoe.model.config.UserInterface.*;
 
 /**
  * @author dogmax296

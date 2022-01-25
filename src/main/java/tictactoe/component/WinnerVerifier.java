@@ -16,12 +16,10 @@
 
 package tictactoe.component;
 
-import tictactoe.model.Cell;
-import tictactoe.model.GameTable;
-import tictactoe.model.Player;
-import tictactoe.model.Sign;
-
-import static tictactoe.model.Sign.*;
+import tictactoe.model.game.Cell;
+import tictactoe.model.game.GameTable;
+import tictactoe.model.game.Player;
+import tictactoe.model.game.Sign;
 
 /**
  * @author dogmax296

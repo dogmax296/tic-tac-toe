@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package tictactoe.model;
+package tictactoe.model.game;
 
 /**
  * @author dogmax296

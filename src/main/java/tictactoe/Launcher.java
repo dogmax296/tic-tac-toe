@@ -17,10 +17,6 @@
 package tictactoe;
 
 import tictactoe.component.*;
-import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
-import tictactoe.model.Player;
-
-import static tictactoe.model.Sign.*;
 
 /**
  * @author dogmax296

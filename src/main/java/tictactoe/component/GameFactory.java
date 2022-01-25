@@ -6,6 +6,7 @@ import tictactoe.model.PlayerType;
 
 import java.util.Locale;
 
+import static tictactoe.component.CommandLineArgumentParser.*;
 import static tictactoe.model.PlayerType.*;
 import static tictactoe.model.Sign.*;
 
@@ -19,34 +20,9 @@ public class GameFactory {
     private PlayerType player2Type;
 
     public GameFactory(final String[] args) {
-        PlayerType player1Type = null;
-        PlayerType player2Type = null;
-
-        for (final String arg : args) {
-            if (USER.name().equalsIgnoreCase(arg) || COMPUTER.name().equalsIgnoreCase(arg)) {
-                if (player1Type == null) {
-                    player1Type = PlayerType.valueOf(arg.toUpperCase());
-
-                } else if (player2Type == null) {
-                    player2Type = PlayerType.valueOf(arg.toUpperCase());
-                } else {
-                    System.err.println("Unsupported command line argument: '" + arg + "'");
-                }
-            } else {
-                System.err.println("Unsupported command line argument: '" + arg + "'");
-            }
-        }
-
-        if (player1Type == null) {
-            this.player1Type = USER;
-            this.player2Type = COMPUTER;
-        } else if (player2Type == null) {
-            this.player1Type = USER;
-            this.player2Type = player1Type;
-        } else {
-            this.player1Type = player1Type;
-            this.player2Type = player2Type;
-        }
+        final PlayerTypes playerTypes = new CommandLineArgumentParser(args).parse();
+        this.player1Type = playerTypes.getPlayer1Type();
+        this.player2Type = playerTypes.getPlayer2Type();
     }
 
     public Game create() {

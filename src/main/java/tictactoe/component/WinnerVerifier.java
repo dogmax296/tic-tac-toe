@@ -18,6 +18,7 @@ package tictactoe.component;
 
 import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
+import tictactoe.model.Player;
 import tictactoe.model.Sign;
 
 import static tictactoe.model.Sign.*;
@@ -27,20 +28,12 @@ import static tictactoe.model.Sign.*;
  * @link https://github.com/dogmax296
  */
 public class WinnerVerifier {
-    public boolean isUserWin(final GameTable gametable) {
-        return isWinner(gametable, X);
-    }
 
-    public boolean isComputerWin(final GameTable gametable) {
-
-        return isWinner(gametable, O);
-    }
-
-    private boolean isWinner(final GameTable gametable, final Sign sign) {
-        return isWinByRows(gametable, sign) ||
-                isWinByCols(gametable, sign) ||
-                isWinByMainDiagonal(gametable, sign) ||
-                isWinBySecondDiagonal(gametable, sign);
+    public boolean isWinner(final GameTable gametable, final Player player) {
+        return isWinByRows(gametable, player.getSign()) ||
+                isWinByCols(gametable, player.getSign()) ||
+                isWinByMainDiagonal(gametable, player.getSign()) ||
+                isWinBySecondDiagonal(gametable, player.getSign());
     }
 
 

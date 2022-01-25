@@ -17,8 +17,11 @@
 package tictactoe.component;
 
 import tictactoe.model.GameTable;
+import tictactoe.model.Player;
 
 import java.util.Random;
+
+import static tictactoe.model.Sign.*;
 
 /**
  * @author dogmax296
@@ -53,29 +56,22 @@ public final class Game {
         System.out.println("Use the following mapping table to specify a cell using numbers from 1 to 9:");
         dataPrinter.printMappingTable();
         final GameTable gametable = new GameTable();
-        if (new Random().nextBoolean()) {
+       /* if (new Random().nextBoolean()) {
             computerMove.make(gametable);
             dataPrinter.printGameTable(gametable);
         }
 
-        final Move[] moves = {userMove, computerMove};
+        */
+
+        final Player[] players = {new Player(X, userMove), new Player(O, computerMove)};
         while (true) {
-            boolean gameOver = false;
-            for (final Move move : moves) {
-                move.make(gametable);
+            for (final Player player : players) {
+                player.makeMove(gametable);
                 dataPrinter.printGameTable(gametable);
-                if (move instanceof UserMove) {
-                    if (winnerVerifier.isUserWin(gametable)) {
-                        System.out.println("YOU WIN!");
-                        printGameOver();
-                        return;
-                    }
-                } else {
-                    if (winnerVerifier.isComputerWin(gametable)) {
-                        System.out.println("COMPUTER WIN!");
-                        printGameOver();
-                        return;
-                    }
+                if (winnerVerifier.isWinner(gametable, player)) {
+                    System.out.println(player + " WIN!");
+                    printGameOver();
+                    return;
                 }
 
                 if (cellVerifier.allCellsFilled(gametable)) {
@@ -84,7 +80,9 @@ public final class Game {
                     return;
                 }
             }
+
         }
+
     }
 
     private void printGameOver() {

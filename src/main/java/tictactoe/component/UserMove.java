@@ -37,11 +37,11 @@ public class UserMove implements Move{
     }
 
     @Override
-    public void make(final GameTable gametable) {
+    public void make(final GameTable gametable, final Sign sign) {
         while (true) {
             final Cell cell = getUserInput();
             if (gametable.isEmpty(cell)) {
-                gametable.setSign(cell, X);
+                gametable.setSign(cell, sign);
                 return;
             } else {
                 System.out.println("Can't make a move, because the cell is not free! Try again!");

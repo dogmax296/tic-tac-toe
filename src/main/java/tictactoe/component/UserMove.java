@@ -28,7 +28,7 @@ import static tictactoe.model.Sign.*;
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public class UserMove {
+public class UserMove implements Move{
 
     private final CellNumberConverter cellNumberConverter;
 
@@ -36,6 +36,7 @@ public class UserMove {
         this.cellNumberConverter = cellNumberConverter;
     }
 
+    @Override
     public void make(final GameTable gametable) {
         while (true) {
             final Cell cell = getUserInput();

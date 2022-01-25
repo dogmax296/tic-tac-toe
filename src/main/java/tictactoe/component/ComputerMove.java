@@ -27,8 +27,9 @@ import static tictactoe.model.Sign.O;
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public class ComputerMove {
+public class ComputerMove  implements Move{
 
+    @Override
     public void make(final GameTable gametable) {
         final Random random = new Random();
         while (true) {

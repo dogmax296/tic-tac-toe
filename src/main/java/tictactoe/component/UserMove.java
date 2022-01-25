@@ -18,8 +18,11 @@ package tictactoe.component;
 
 import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
+import tictactoe.model.Sign;
 
 import java.util.Scanner;
+
+import static tictactoe.model.Sign.*;
 
 /**
  * @author dogmax296
@@ -37,7 +40,7 @@ public class UserMove {
         while (true) {
             final Cell cell = getUserInput();
             if (gametable.isEmpty(cell)) {
-                gametable.setSign(cell, 'X');
+                gametable.setSign(cell, X);
                 return;
             } else {
                 System.out.println("Can't make a move, because the cell is not free! Try again!");

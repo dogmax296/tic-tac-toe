@@ -21,6 +21,8 @@ import tictactoe.model.GameTable;
 
 import java.util.Random;
 
+import static tictactoe.model.Sign.O;
+
 /**
  * @author dogmax296
  * @link https://github.com/dogmax296
@@ -34,7 +36,7 @@ public class ComputerMove {
             final int coll = random.nextInt(3);
             final Cell randomCell = new Cell(row, coll);
             if (gametable.isEmpty(randomCell)) {
-                gametable.setSign(randomCell, '0');
+                gametable.setSign(randomCell, O);
                 return;
             }
         }

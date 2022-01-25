@@ -4,8 +4,6 @@ import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
 import tictactoe.model.Player;
 import tictactoe.model.PlayerType;
 
-import java.util.Locale;
-
 import static tictactoe.component.CommandLineArgumentParser.*;
 import static tictactoe.model.PlayerType.*;
 import static tictactoe.model.Sign.*;
@@ -43,7 +41,7 @@ public class GameFactory {
 
         final boolean canSecondPlayerMakeFirstMove = this.player1Type != this.player2Type;
         return new Game(
-                new DataPrinter(cellNumberConverter),
+                new DataPrinterImpl(cellNumberConverter),
                 player1,
                 player2,
                 new WinnerVerifier(),

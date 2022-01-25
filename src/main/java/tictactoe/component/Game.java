@@ -27,7 +27,7 @@ import java.util.Random;
  */
 public final class Game {
 
-    private final DataPrinter dataPrinter;
+    private final DataPrinterImpl dataPrinterImpl;
 
     private final Player player1;
 
@@ -39,12 +39,12 @@ public final class Game {
 
     private final boolean canSecondPlayerMakeFirstMove;
 
-    public Game(final DataPrinter dataPrinter,
+    public Game(final DataPrinterImpl dataPrinterImpl,
                 final Player player1,
                 final Player player2,
                 final WinnerVerifier winnerVerifier,
                 final CellVerifier cellVerifier, final boolean canSecondPlayerMakeFirstMove) {
-        this.dataPrinter = dataPrinter;
+        this.dataPrinterImpl = dataPrinterImpl;
         this.player1 = player1;
         this.player2 = player2;
         this.winnerVerifier = winnerVerifier;
@@ -54,17 +54,17 @@ public final class Game {
 
     public void play() {
         System.out.println("Use the following mapping table to specify a cell using numbers from 1 to 9:");
-        dataPrinter.printMappingTable();
+        dataPrinterImpl.printMappingTable();
         final GameTable gametable = new GameTable();
        if (canSecondPlayerMakeFirstMove && new Random().nextBoolean()) {
             player2.makeMove(gametable);
-            dataPrinter.printGameTable(gametable);
+            dataPrinterImpl.printGameTable(gametable);
         }
         final Player[] players = {player1, player2};
         while (true) {
             for (final Player player : players) {
                 player.makeMove(gametable);
-                dataPrinter.printGameTable(gametable);
+                dataPrinterImpl.printGameTable(gametable);
                 if (winnerVerifier.isWinner(gametable, player)) {
                     System.out.println(player + " WIN!");
                     printGameOver();

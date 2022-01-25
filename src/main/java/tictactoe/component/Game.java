@@ -67,27 +67,27 @@ public final class Game {
                 if (move instanceof UserMove) {
                     if (winnerVerifier.isUserWin(gametable)) {
                         System.out.println("YOU WIN!");
-                        gameOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 } else {
                     if (winnerVerifier.isComputerWin(gametable)) {
                         System.out.println("COMPUTER WIN!");
-                        gameOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 }
 
                 if (cellVerifier.allCellsFilled(gametable)) {
                     System.out.println("SORRY, DRAW!");
-                    gameOver = true;
-                    break;
+                    printGameOver();
+                    return;
                 }
             }
-            if (gameOver) {
-                break;
-            }
         }
+    }
+
+    private void printGameOver() {
         System.out.println("GAME OVER");
     }
 

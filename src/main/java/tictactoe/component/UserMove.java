@@ -20,50 +20,31 @@ import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
 import tictactoe.model.Sign;
 
-import java.util.Scanner;
-
-import static tictactoe.model.Sign.*;
-
 /**
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
 public class UserMove implements Move{
 
-    private final CellNumberConverter cellNumberConverter;
+    private final UserInputReader userInputReader;
+    private DataPrinter dataprinter;
 
-    public UserMove(final CellNumberConverter cellNumberConverter) {
-        this.cellNumberConverter = cellNumberConverter;
+    public UserMove(final UserInputReader userInputReader, final DataPrinter dataprinter) {
+        this.userInputReader = userInputReader;
+        this.dataprinter = dataprinter;
     }
 
     @Override
     public void make(final GameTable gametable, final Sign sign) {
         while (true) {
-            final Cell cell = getUserInput();
+            final Cell cell = userInputReader.getUserInput();
             if (gametable.isEmpty(cell)) {
                 gametable.setSign(cell, sign);
                 return;
             } else {
-                System.out.println("Can't make a move, because the cell is not free! Try again!");
+                dataprinter.printErrorMessage("Can't make a move, because the cell is not free! Try again!");
             }
         }
     }
 
-    private Cell getUserInput() {
-        while (true) {
-            System.out.println("Please, enter the number from 1 to 9!");
-            final String userInput = new Scanner(System.in).nextLine();
-            if (userInput.length() == 1) {
-                final char ch = userInput.charAt(0);
-                if (ch >= '1' && ch <= '9') {
-                    return cellNumberConverter.toCell(ch);
-                } else {
-                    System.out.println("Wrong Symbol!");
-                }
-            } else {
-                System.out.println("Use single character");
-            }
-        }
-
-    }
 }

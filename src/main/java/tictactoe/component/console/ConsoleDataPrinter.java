@@ -2,7 +2,6 @@ package tictactoe.component.console;
 
 import tictactoe.component.CellNumberConverter;
 import tictactoe.component.DataPrinter;
-import tictactoe.component.DataPrinterImpl;
 import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
 

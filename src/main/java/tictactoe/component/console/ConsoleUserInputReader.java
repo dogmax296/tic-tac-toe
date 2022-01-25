@@ -32,10 +32,10 @@ public class ConsoleUserInputReader implements UserInputReader {
                 if (ch >= '1' && ch <= '9') {
                     return cellNumberConverter.toCell(ch);
                 } else {
-                    System.out.println("Wrong Symbol!");
+                    dataPrinter.printInfoMessage("Wrong Symbol!");
                 }
             } else {
-                System.out.println("Use single character");
+                dataPrinter.printInfoMessage("Use single character");
             }
         }
 

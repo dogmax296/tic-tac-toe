@@ -3,6 +3,7 @@ package tictactoe.component;
 import tictactoe.component.console.ConsoleDataPrinter;
 import tictactoe.component.console.ConsoleUserInputReader;
 import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
+import tictactoe.component.swing.GameWindow;
 import tictactoe.model.Player;
 import tictactoe.model.PlayerType;
 
@@ -26,9 +27,11 @@ public class GameFactory {
     }
 
     public Game create() {
-        final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
-        final DataPrinter dataPrinter = new ConsoleDataPrinter(cellNumberConverter);
-        final UserInputReader userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
+        final GameWindow gameWindow = new GameWindow();
+
+        //final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
+        final DataPrinter dataPrinter = gameWindow; //new ConsoleDataPrinter(cellNumberConverter);
+        final UserInputReader userInputReader = gameWindow; //new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
 
         Player player1 = null;
         if (this.player1Type == USER) {

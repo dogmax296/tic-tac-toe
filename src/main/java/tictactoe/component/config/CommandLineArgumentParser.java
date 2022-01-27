@@ -3,6 +3,7 @@ package tictactoe.component.config;
 import tictactoe.model.config.PlayerType;
 import tictactoe.model.config.UserInterface;
 
+import static java.lang.String.format;
 import static tictactoe.model.config.PlayerType.*;
 import static tictactoe.model.config.UserInterface.*;
 
@@ -31,17 +32,25 @@ public class CommandLineArgumentParser {
                 } else if (player2Type == null) {
                     player2Type = PlayerType.valueOf(arg.toUpperCase());
                 } else {
-                    System.err.println("Unsupported command line argument: '" + arg + "'");
+                    System.err.printf(
+                            "Invalid command line arguments: '%s', because player types already set: player1Type='%s', player2Type='%s'!%n",
+                            arg, player1Type, player2Type
+                    );
                 }
             } else if (GUI.name().equalsIgnoreCase(arg) || CONSOLE.name().equalsIgnoreCase(arg)) {
                 if (userInterface == null) {
                     userInterface = UserInterface.valueOf(arg.toUpperCase());
                 } else {
-                    System.err.println("Unsupported command line argument: '" + arg + "'");
+                    System.err.printf(
+                            "Invalid command line arguments: '%s', because user interface is already set: '%s'!%n",
+                            arg, userInterface
+                    );
                 }
 
             } else {
-                System.err.println("Unsupported command line argument: '" + arg + "'");
+                System.err.printf(
+                        "Unsupported command line argument: '%s'%n",
+                        arg);
             }
         }
 

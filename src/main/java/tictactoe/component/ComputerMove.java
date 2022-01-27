@@ -22,26 +22,34 @@ import tictactoe.model.game.Sign;
 
 import java.util.Random;
 
+import static java.lang.String.format;
+import static tictactoe.model.game.Sign.EMPTY;
+
 /**
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public class ComputerMove  implements Move{
+public class ComputerMove implements Move{
 
     @Override
     public void make(final GameTable gametable, Sign sign) {
-        final Random random = new Random();
-        while (true) {
-            final int row = random.nextInt(3);
-            final int coll = random.nextInt(3);
-            final Cell randomCell = new Cell(row, coll);
-            if (gametable.isEmpty(randomCell)) {
-                gametable.setSign(randomCell, sign);
-                return;
+        final Cell[] emptyCells = new Cell[9];
+        int count = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                final Cell cell = new Cell(i,j);
+                if(gametable.isEmpty(cell)){
+                    emptyCells[count++] = cell;
+                }
             }
         }
+        if(count > 0){
+            final Cell randomCell = emptyCells[new Random().nextInt(count)];
+            gametable.setSign(randomCell,sign);
+        } else {
+            throw new IllegalArgumentException("No empty cell for computer move");
+        }
+
 
     }
-
-
 }

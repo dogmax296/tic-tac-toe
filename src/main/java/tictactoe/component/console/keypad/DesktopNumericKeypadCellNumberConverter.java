@@ -47,6 +47,15 @@ public final class DesktopNumericKeypadCellNumberConverter implements CellNumber
     }
 
     public char toNumber(final Cell cell) {
-        return mappingTable[cell.getRow()][cell.getColl()];
+        try{
+            return mappingTable[cell.getRow()][cell.getColl()];
+        } catch (final ArrayIndexOutOfBoundsException e) {
+           throw new IllegalArgumentException(
+                   format(
+                           "Row and Col indexes must be between 0 and 2! Current row is %S, current col is %S",
+                           cell.getRow(), cell.getColl()
+                   )
+           );
+        }
     }
 }

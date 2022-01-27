@@ -5,14 +5,16 @@ import tictactoe.model.game.Cell;
 import tictactoe.model.game.GameTable;
 import tictactoe.model.game.Sign;
 
+import static tictactoe.model.game.Sign.*;
+
 /**
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
-
+public class PreventUserWinComputerMoveStrategy implements ComputerMoveStrategy {
     @Override
     public boolean tryToMakeMove(final GameTable gametable, final Sign sign) {
+
         return tryToMakeMoveToRows(gametable, sign) ||
                 tryToMakeMoveToCols(gametable, sign) ||
                 tryToMakeMoveToMainDiagonal(gametable, sign) ||
@@ -47,7 +49,8 @@ public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
         return tryToMakeMoveUsingLambda((k, j) -> new Cell(j, 2 - j), gametable, sign, -1);
     }
 
-    private boolean tryToMakeMoveUsingLambda(final Lambda lambda, final GameTable gametable, final Sign sign, final int i) {
+    private boolean tryToMakeMoveUsingLambda(final Lambda lambda,
+                                             final GameTable gametable, final Sign sign, final int i) {
         int countEmptyCells = 0;
         int countSignCells = 0;
         Cell lastEmptyCell = null;
@@ -56,7 +59,7 @@ public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
             if (gametable.isEmpty(cell)) {
                 lastEmptyCell = cell;
                 countEmptyCells++;
-            } else if (gametable.getSign(cell) == sign) {
+            } else if (gametable.getSign(cell) == sign.oppositeSign()) {
                 countSignCells++;
             } else {
                 break;
@@ -73,6 +76,5 @@ public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
     interface Lambda {
         Cell calculate(int k, int j);
     }
-
 
 }

@@ -29,27 +29,23 @@ import static tictactoe.model.game.Sign.EMPTY;
  * @author dogmax296
  * @link https://github.com/dogmax296
  */
-public class ComputerMove implements Move{
+public class ComputerMove implements Move {
+
+    private final ComputerMoveStrategy[] strategies;
+
+    public ComputerMove(final ComputerMoveStrategy[] strategies) {
+        this.strategies = strategies;
+    }
 
     @Override
     public void make(final GameTable gametable, Sign sign) {
-        final Cell[] emptyCells = new Cell[9];
-        int count = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                final Cell cell = new Cell(i,j);
-                if(gametable.isEmpty(cell)){
-                    emptyCells[count++] = cell;
-                }
+        for (final ComputerMoveStrategy strategy : strategies) {
+            if (strategy.tryToMakeMove(gametable, sign)) {
+                return;
             }
         }
-        if(count > 0){
-            final Cell randomCell = emptyCells[new Random().nextInt(count)];
-            gametable.setSign(randomCell,sign);
-        } else {
-            throw new IllegalArgumentException("No empty cell for computer move");
-        }
-
-
+        throw new IllegalArgumentException(
+                "Game table doesn't have empty cells or invalid configuration for the computer move strategies!"
+        );
     }
 }

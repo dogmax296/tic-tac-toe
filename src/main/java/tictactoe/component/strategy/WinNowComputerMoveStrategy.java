@@ -22,60 +22,37 @@ public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
 
     private boolean tryToMakeMoveToRows(final GameTable gametable, final Sign sign) {
         for (int i = 0; i < 3; i++) {
-            int countEmptyCells = 0;
-            int countSignCells = 0;
-            Cell lastEmptyCell = null;
-            for (int j = 0; j < 3; j++) {
-                final Cell cell = new Cell(i, j);
-                if (gametable.isEmpty(cell)) {
-                    lastEmptyCell = cell;
-                    countEmptyCells++;
-                } else if (gametable.getSign(cell) == sign) {
-                    countSignCells++;
-                } else {
-                    break;
-                }
-            }
-            if (countEmptyCells == 1 && countSignCells == 2) {
-                gametable.setSign(lastEmptyCell, sign);
+            if (tryToMakeMoveUsingLambda((k, j) -> new Cell(k, j), gametable, sign, i)) {
                 return true;
             }
-
         }
         return false;
+
     }
 
     private boolean tryToMakeMoveToCols(final GameTable gametable, final Sign sign) {
         for (int i = 0; i < 3; i++) {
-            int countEmptyCells = 0;
-            int countSignCells = 0;
-            Cell lastEmptyCell = null;
-            for (int j = 0; j < 3; j++) {
-                final Cell cell = new Cell(j, i);
-                if (gametable.isEmpty(cell)) {
-                    lastEmptyCell = cell;
-                    countEmptyCells++;
-                } else if (gametable.getSign(cell) == sign) {
-                    countSignCells++;
-                } else {
-                    break;
-                }
-            }
-            if (countEmptyCells == 1 && countSignCells == 2) {
-                gametable.setSign(lastEmptyCell, sign);
+            if (tryToMakeMoveUsingLambda((k, j) -> new Cell(j, k), gametable, sign, i)) {
                 return true;
             }
-
         }
         return false;
     }
 
     private boolean tryToMakeMoveToMainDiagonal(final GameTable gametable, final Sign sign) {
+        return tryToMakeMoveUsingLambda((k, j) -> new Cell(j, j), gametable, sign, -1);
+    }
+
+    private boolean tryToMakeMoveToSecondDiagonal(final GameTable gametable, final Sign sign) {
+        return tryToMakeMoveUsingLambda((k, j) -> new Cell(j, 2 - j), gametable, sign, -1);
+    }
+
+    private boolean tryToMakeMoveUsingLambda(final Lambda lambda, final GameTable gametable, final Sign sign, final int i) {
         int countEmptyCells = 0;
         int countSignCells = 0;
         Cell lastEmptyCell = null;
         for (int j = 0; j < 3; j++) {
-            final Cell cell = new Cell(j, j);
+            final Cell cell = lambda.calculate(i, j);
             if (gametable.isEmpty(cell)) {
                 lastEmptyCell = cell;
                 countEmptyCells++;
@@ -92,26 +69,10 @@ public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
         return false;
     }
 
-    private boolean tryToMakeMoveToSecondDiagonal(final GameTable gametable, final Sign sign) {
-        int countEmptyCells = 0;
-        int countSignCells = 0;
-        Cell lastEmptyCell = null;
-        for (int j = 0; j < 3; j++) {
-            final Cell cell = new Cell(j, 2 - j);
-            if (gametable.isEmpty(cell)) {
-                lastEmptyCell = cell;
-                countEmptyCells++;
-            } else if (gametable.getSign(cell) == sign) {
-                countSignCells++;
-            } else {
-                break;
-            }
-        }
-        if (countEmptyCells == 1 && countSignCells == 2) {
-            gametable.setSign(lastEmptyCell, sign);
-            return true;
-        }
-        return false;
+    @FunctionalInterface
+    private interface Lambda {
+        Cell calculate(int k, int j);
     }
+
 
 }

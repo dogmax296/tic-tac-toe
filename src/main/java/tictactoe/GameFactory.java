@@ -7,6 +7,7 @@ import tictactoe.component.console.ConsoleDataPrinter;
 import tictactoe.component.console.ConsoleGameOverHandler;
 import tictactoe.component.console.ConsoleUserInputReader;
 import tictactoe.component.console.keypad.DesktopNumericKeypadCellNumberConverter;
+import tictactoe.component.strategy.FirstMoveToTheCenterComputerMoveStrategy;
 import tictactoe.component.strategy.RandomComputerMoveStrategy;
 import tictactoe.component.swing.GameWindow;
 import tictactoe.model.game.Player;
@@ -37,6 +38,7 @@ public class GameFactory {
 
     public Game create() {
         final ComputerMoveStrategy[] computerMoveStrategies = {
+                new FirstMoveToTheCenterComputerMoveStrategy(),
                 new RandomComputerMoveStrategy()
         };
         final DataPrinter dataPrinter;
@@ -54,14 +56,14 @@ public class GameFactory {
             gameOverHandler = new ConsoleGameOverHandler(dataPrinter);
         }
 
-        Player player1 = null;
+        Player player1;
         if (this.player1Type == USER) {
             player1 = new Player(X, new UserMove(userInputReader, dataPrinter));
         } else {
             player1 = new Player(X, new ComputerMove(computerMoveStrategies));
         }
 
-        Player player2 = null;
+        Player player2;
         if (this.player2Type == USER) {
             player2 = new Player(O, new UserMove(userInputReader, dataPrinter));
         } else {

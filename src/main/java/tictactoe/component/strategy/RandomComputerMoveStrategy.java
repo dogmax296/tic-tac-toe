@@ -12,6 +12,7 @@ import java.util.Random;
  * @link https://github.com/dogmax296
  */
 public class RandomComputerMoveStrategy implements ComputerMoveStrategy {
+
     @Override
     public boolean tryToMakeMove(final GameTable gameTable, final Sign sign) {
         final Cell[] emptyCells = new Cell[9];

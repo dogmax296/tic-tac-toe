@@ -8,5 +8,6 @@ import tictactoe.model.game.Sign;
  * @link https://github.com/dogmax296
  */
 public interface ComputerMoveStrategy {
-    boolean tryToMakeMove(GameTable gametable, Sign sign);
+
+    boolean tryToMakeMove(GameTable gameTable, Sign sign);
 }

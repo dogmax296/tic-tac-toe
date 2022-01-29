@@ -7,8 +7,8 @@ import tictactoe.component.console.ConsoleDataPrinter;
 import tictactoe.component.console.ConsoleGameOverHandler;
 import tictactoe.component.console.ConsoleUserInputReader;
 import tictactoe.component.console.keypad.DesktopNumericKeypadCellNumberConverter;
-import tictactoe.component.strategy.*;
 import tictactoe.component.swing.GameWindow;
+import tictactoe.model.config.Level;
 import tictactoe.model.game.Player;
 import tictactoe.model.config.PlayerType;
 import tictactoe.model.config.UserInterface;
@@ -27,22 +27,17 @@ public class GameFactory {
     private final PlayerType player1Type;
     private final PlayerType player2Type;
     private final UserInterface userInterface;
+    private final Level level;
 
     public GameFactory(final String[] args) {
         final CommandLineArguments commandLineArguments = new CommandLineArgumentParser(args).parse();
         player1Type = commandLineArguments.getPlayer1Type();
         player2Type = commandLineArguments.getPlayer2Type();
         userInterface = commandLineArguments.getUserInterface();
+        level = commandLineArguments.getGameLevel();
     }
 
     public Game create() {
-        final ComputerMoveStrategy[] computerMoveStrategies = {
-                new WinNowComputerMoveStrategy(),
-                new PreventUserWinComputerMoveStrategy(),
-                new WinOnTheNextStepComputerMoveStrategy(),
-                new FirstMoveToTheCenterComputerMoveStrategy(),
-                new RandomComputerMoveStrategy()
-        };
         final DataPrinter dataPrinter;
         final UserInputReader userInputReader;
         final GameOverHandler gameOverHandler;
@@ -62,14 +57,14 @@ public class GameFactory {
         if (this.player1Type == USER) {
             player1 = new Player(X, new UserMove(userInputReader, dataPrinter));
         } else {
-            player1 = new Player(X, new ComputerMove(computerMoveStrategies));
+            player1 = new Player(X, new ComputerMove(level.getStrategies()));
         }
 
         Player player2;
         if (this.player2Type == USER) {
             player2 = new Player(O, new UserMove(userInputReader, dataPrinter));
         } else {
-            player2 = new Player(O, new ComputerMove(computerMoveStrategies));
+            player2 = new Player(O, new ComputerMove(level.getStrategies()));
         }
 
         final boolean canSecondPlayerMakeFirstMove = this.player1Type != this.player2Type;
